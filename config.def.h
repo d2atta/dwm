@@ -30,10 +30,9 @@ static const int scalepreview       = 4;
 static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
 static const char *fonts[]     = {"FiraCode Nerd Font:size=14:antialias=true:autohint=true",
-                                  "Hack:size=8:antialias=true:autohint=true",
+                                  "Hack Nerd Font:size=14:antialias=true:autohint=true",
                                   "JoyPixels:size=10:antialias=true:autohint=true"
 				 };
-static const char dmenufont[]       = "monospace:size=10";
 static const int colorfultag        = 1;  /* 0 meaMaterialns use SchemeSel for selected non vacant tag */
 
 // theme
@@ -78,12 +77,11 @@ static const Rule rules[] = {
        	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
 	{ "Gimp",         NULL,       NULL,       0,            0,           1,           -1 },
 	{ "Firefox",      NULL,       NULL,       1 << 8,       0,           0,           -1 },
+	{ "Brave",        NULL,       NULL,       2,            0,          0,           -1 },
       	{ "eww",          NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Lxappearance", NULL,       NULL,       0,            1,           1,           -1 },
 	{ "Gnome-calculator", NULL,   NULL,       0,            1,           1,           -1 },
 	{ "St",          "Music",     NULL,       1 << 4,       1,           1,           -1 },
-	{ "firefox",      NULL,       NULL,       2,            0,           0,           -1 },
-	{ "Thunar",       NULL,       NULL,       1 << 2,       0,           0,           -1 },
+	{ "Pcmanfm",      NULL,       NULL,       1 << 2,       0,           0,           -1 },
 	{ NULL, "telegram-desktop",   NULL,       1 << 3,       0,           0,           -1 },
 };
 
@@ -131,22 +129,20 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]    = { "dmenu_run", "-l", "5", "-z", "300", NULL };
-static const char *termcmd[]  = {  "st", "-e", "fish", NULL }; // change this to your term
-static const char *musicmd[]  = { "st", "-n", "Music", "-g", "70x20", "-e", "ncmpcpp" , NULL};
+static const char *passcmd[]    = { "passmenu", "-l", "5", "-z", "300", "-p", "site", NULL };
+static const char *termcmd[]  = {  "st", NULL }; // change this to your term
 static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
 static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
 /* volume up and down */
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *upvol[]   = { "/usr/bin/pamixer", "-i", "5", NULL };
+static const char *downvol[] = { "/usr/bin/pamixer", "-d", "5", NULL };
+static const char *mutevol[] = { "/usr/bin/pamixer", "-t", NULL };
 
 static Key keys[] = {
     /* modifier                 Chain key        key        function        argument */
     { MODKEY,                     -1,           XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY,                     -1,           XK_Return, spawn,          {.v = termcmd }},  
 
-    /* {MODKEY | ControlMask,     -1,           XK_u,      spawn,          SHCMD("maim | xclip -selection clipboard -t image/png")}, */
-    /* {MODKEY,                   -1,           XK_u,      spawn,          SHCMD("maim --select | xclip -selection clipboard -t image/png")}, */
     { 0,                          -1,       XF86MonBrightnessDown, spawn,          {.v = xd}},
     { 0,                          -1,       XF86MonBrightnessUp, spawn,          {.v = xi}},
     { MODKEY,                     -1,           XK_b,      togglebar,      {0} },
@@ -210,23 +206,16 @@ static Key keys[] = {
     { MODKEY|ShiftMask,                  -1,      XK_p,      setborderpx,    {.i = +1 } },
     { MODKEY|ShiftMask,                  -1,      XK_w,      setborderpx,    {.i = default_border } },
 
-    /* Keybindings for programs using the format SUPER + ALT + "key" */
-    { MODKEY|Mod1Mask,              -1,           XK_b,      spawn,          SHCMD("firefox") },
     { MODKEY|Mod1Mask,              -1,           XK_e,      spawn,          SHCMD("emacsclient -c") },
-    { MODKEY|Mod1Mask,              -1,           XK_w,      spawn,          SHCMD("tabbed -r 2 surf -pe x ~/.config/startpage/Bento/index.html") },
-    { MODKEY|Mod1Mask,              -1,           XK_f,      spawn,          SHCMD("thunar") },
-    { MODKEY|Mod1Mask,              -1,           XK_m,      spawn,          { .v = musicmd } },
-    { MODKEY|Mod1Mask,              -1,           XK_s,      spawn,          SHCMD("dm-hub") },
 
     /* Dmenu scripts launched with emacs-style keychords SUPER + s followed by "key" */
-    { MODKEY,                     XK_s,           XK_c,      spawn,          SHCMD("dm-conf") },
+    { MODKEY,                     XK_s,           XK_c,      spawn,          SHCMD("dm-confedit") },
     { MODKEY,                     XK_s,           XK_k,      spawn,          SHCMD("dm-kill") },
-    { MODKEY,                     XK_s,           XK_s,      spawn,          SHCMD("dm-logout") },
+    { MODKEY,                     XK_s,           XK_l,      spawn,          SHCMD("dm-logout") },
     { MODKEY,                     XK_s,           XK_e,      spawn,          SHCMD("dm-emoji") },
-    { MODKEY,                     XK_s,           XK_m,      spawn,          SHCMD("dm-music") },
-    { MODKEY,                     XK_s,           XK_u,      spawn,          SHCMD("dm-pacman") },
-    { MODKEY,                     XK_s,           XK_l,      spawn,          SHCMD("dm-search") },
-    { MODKEY,                     XK_s,           XK_b,      spawn,          SHCMD("sxiv -t ~/Pictures") },
+    { MODKEY,                     XK_s,           XK_s,      spawn,          SHCMD("dm-websearch") },
+    { MODKEY,                     XK_s,           XK_p,      spawn,           {.v = passcmd } },
+    { MODKEY,                     XK_s,           XK_b,      spawn,          SHCMD("sxiv -t $(xdg-user-dir PICTURES)") },
 
     TAGKEYS(                        -1,           XK_1,                      0)
     TAGKEYS(                        -1,           XK_2,                      1)
@@ -240,12 +229,13 @@ static Key keys[] = {
 
     { MODKEY|ControlMask,           -1,           XK_q,      quit,           {0} },
     { MODKEY|ShiftMask,             -1,           XK_r,      quit,           {1} },
+    { MODKEY|ShiftMask,             -1,           XK_F5,      xrdb,           {.v = NULL} },
     { MODKEY,                       -1,           XK_e,      hidewin,        {0} },
     { MODKEY|ShiftMask,             -1,           XK_e,      restorewin,     {0} },
     /* For volume */
-    { MODKEY,                       -1,          XK_F7,         spawn,  {.v = downvol } },
-    { MODKEY,                       -1,          XK_F6,         spawn,  {.v = mutevol } },
-    { MODKEY,                       -1,          XK_F8,         spawn,  {.v = upvol   } },
+    { 0,                            -1,           XK_F7,     spawn,  {.v = downvol } },
+    { 0,                            -1,           XK_F6,     spawn,  {.v = mutevol } },
+    { 0,                            -1,           XK_F8,     spawn,  {.v = upvol   } },
 };
 
 /* button definitions */
@@ -256,9 +246,6 @@ static Button buttons[] = {
     { ClkLtSymbol,          0,              Button3,        cyclelayout,      {.i = +1 } },
     { ClkWinTitle,          0,              Button2,        zoom,             {0} },
     { ClkStatusText,        0,              Button2,        spawn,            {.v = termcmd } },
-    /* { ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 2} }, */
-    /* { ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} }, */
-    /* { ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} }, */
 
 		/* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */
