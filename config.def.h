@@ -36,24 +36,50 @@ static const char *fonts[]     = {"FiraCode Nerd Font:size=14:antialias=true:aut
 static const int colorfultag        = 1;  /* 0 meaMaterialns use SchemeSel for selected non vacant tag */
 
 // theme
-#include "themes/nord.h"
+// #include "themes/nord.h"
 
-static const char *colors[][3]      = {
+static char color1[] = "#366C93";
+static char color2[] = "#1B9AAD";
+static char color3[] = "#7898B2";
+static char color4[] = "#8C9AB4";
+static char color5[] = "#A6A1B1";
+static char color6[] = "#DFB1B5";
+static char color7[] = "#f5dccf"; // forground
+static char color8[] = "#ab9a90";
+static char gray[]  = "#3B4252";
+static char background[] = "#10111d";
+
+static const char *colors[][3] = {
     /*                      fg     bg   border   */
-    [SchemeNorm]       = { gray3, black, gray2 },
-    [SchemeSel]        = { gray4, blue,  gray4  },
-    [TabSel]           = { blue, gray2,  black  },
-    [TabNorm]          = { gray3, black, black },
-    [SchemeTag]        = { gray3, black, black },
-    [SchemeTag1]       = { blue,  black, black },
-    [SchemeTag2]       = { red,   black, black },
-    [SchemeTag3]       = { orange, black,black },
-    [SchemeTag4]       = { green, black, black },
-    [SchemeTag5]       = { pink,  black, black },
-    [SchemeLayout]     = { green, black, black }, 
-    [SchemeBtnPrev]    = { green, black, black }, 
-    [SchemeBtnNext]    = { yellow, black, black }, 
-    [SchemeBtnClose]   = { red, black, black }, 
+    [SchemeNorm]       = { color8, background, gray },
+    [SchemeSel]        = { gray, color1,  gray  },
+    [TabSel]           = { color7, background,  background  },
+    [TabNorm]          = { gray, background, background },
+    [SchemeTag]        = { gray, background, background },
+    [SchemeTag1]       = { color1, background, background },
+    [SchemeTag2]       = { color3, background, background },
+    [SchemeTag3]       = { color4, background,background },
+    [SchemeTag4]       = { color2, background, background },
+    [SchemeTag5]       = { color5, background, background },
+    [SchemeLayout]     = { color4, background, background }, 
+    [SchemeBtnPrev]    = { color4, background, background }, 
+    [SchemeBtnNext]    = { color6, background, background }, 
+    [SchemeBtnClose]   = { color2, background, background }, 
+};
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+	{ "color1", STRING, &color1 },
+	{ "color2", STRING, &color2 },
+	{ "color3",  STRING, &color3 },
+	{ "color4",  STRING, &color4 },
+	{ "color5",  STRING, &color5 },
+	{ "color6",  STRING, &color6 },
+	{ "color7",  STRING, &color7 },
+	{ "color8",  STRING, &color8 },
+	{ "background",  STRING, &background },
 };
 
 /* tagging */
