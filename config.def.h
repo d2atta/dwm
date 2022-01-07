@@ -51,35 +51,35 @@ static char background[] = "#10111d";
 
 static const char *colors[][3] = {
     /*                      fg     bg   border   */
-    [SchemeNorm]       = { color8, background, gray },
-    [SchemeSel]        = { gray, color1,  gray  },
-    [TabSel]           = { color7, background,  background  },
-    [TabNorm]          = { gray, background, background },
-    [SchemeTag]        = { gray, background, background },
-    [SchemeTag1]       = { color1, background, background },
-    [SchemeTag2]       = { color3, background, background },
-    [SchemeTag3]       = { color4, background,background },
-    [SchemeTag4]       = { color2, background, background },
-    [SchemeTag5]       = { color5, background, background },
-    [SchemeLayout]     = { color4, background, background }, 
-    [SchemeBtnPrev]    = { color4, background, background }, 
-    [SchemeBtnNext]    = { color6, background, background }, 
-    [SchemeBtnClose]   = { color2, background, background }, 
+    [SchemeNorm]     = { color8, background, gray },
+    [SchemeSel]      = { gray, color1,  gray  },
+    [TabSel]         = { color7, background,  background  },
+    [TabNorm]        = { gray, background, background },
+    [SchemeTag]      = { gray, background, background },
+    [SchemeTag1]     = { color1, background, background },
+    [SchemeTag2]     = { color3, background, background },
+    [SchemeTag3]     = { color4, background,background },
+    [SchemeTag4]     = { color2, background, background },
+    [SchemeTag5]     = { color5, background, background },
+    [SchemeLayout]   = { color4, background, background }, 
+    [SchemeBtnPrev]  = { color4, background, background }, 
+    [SchemeBtnNext]  = { color6, background, background }, 
+    [SchemeBtnClose] = { color2, background, background }, 
 };
 
 /*
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-	{ "color1", STRING, &color1 },
-	{ "color2", STRING, &color2 },
-	{ "color3",  STRING, &color3 },
-	{ "color4",  STRING, &color4 },
-	{ "color5",  STRING, &color5 },
-	{ "color6",  STRING, &color6 },
-	{ "color7",  STRING, &color7 },
-	{ "color8",  STRING, &color8 },
-	{ "background",  STRING, &background },
+    { "color1", STRING, &color1 },
+    { "color2", STRING, &color2 },
+    { "color3",  STRING, &color3 },
+    { "color4",  STRING, &color4 },
+    { "color5",  STRING, &color5 },
+    { "color6",  STRING, &color6 },
+    { "color7",  STRING, &color7 },
+    { "color8",  STRING, &color8 },
+    { "background",  STRING, &background },
 };
 
 /* tagging */
@@ -241,7 +241,7 @@ static Key keys[] = {
     { MODKEY,                     XK_s,           XK_e,      spawn,          SHCMD("dm-emoji") },
     { MODKEY,                     XK_s,           XK_s,      spawn,          SHCMD("dm-websearch") },
     { MODKEY,                     XK_s,           XK_p,      spawn,           {.v = passcmd } },
-    { MODKEY,                     XK_s,           XK_b,      spawn,          SHCMD("sxiv -t $(xdg-user-dir PICTURES)") },
+    { MODKEY,                     XK_s,           XK_b,      spawn,          SHCMD("sxiv -art $(xdg-user-dir PICTURES)") },
 
     TAGKEYS(                        -1,           XK_1,                      0)
     TAGKEYS(                        -1,           XK_2,                      1)

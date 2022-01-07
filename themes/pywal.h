@@ -1,1 +1,0 @@
-/home/devildev/.cache/wal/pywal.h
