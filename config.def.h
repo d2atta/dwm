@@ -102,11 +102,10 @@ static const Rule rules[] = {
      */
        	/* class      instance    title       tags mask     iscentered   isfloating   monitor */
 	{ "Gimp",         NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Firefox",      NULL,       NULL,       1 << 8,       0,           0,           -1 },
 	{ "Brave",        NULL,       NULL,       2,            0,          0,           -1 },
       	{ "eww",          NULL,       NULL,       0,            0,           1,           -1 },
 	{ "Gnome-calculator", NULL,   NULL,       0,            1,           1,           -1 },
-	{ "St",          "Music",     NULL,       1 << 4,       1,           1,           -1 },
+	{ "St",          "Music",     NULL,       0,            1,           1,           -1 },
 	{ "Pcmanfm",      NULL,       NULL,       1 << 2,       0,           0,           -1 },
 	{ NULL, "telegram-desktop",   NULL,       1 << 3,       0,           0,           -1 },
 };
