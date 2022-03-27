@@ -33,7 +33,7 @@ static const char *fonts[]     = {"FiraCode Nerd Font:size=14:antialias=true:aut
                                   "Hack Nerd Font:size=14:antialias=true:autohint=true",
                                   "JoyPixels:size=10:antialias=true:autohint=true"
 				 };
-static const int colorfultag        = 1;  /* 0 meaMaterialns use SchemeSel for selected non vacant tag */
+static const int colorfultag        =  1;  /* 0 meaMaterialns use SchemeSel for selected non vacant tag */
 
 // theme
 // #include "themes/nord.h"
@@ -52,7 +52,7 @@ static char background[] = "#10111d";
 static const char *colors[][3] = {
     /*                      fg     bg   border   */
     [SchemeNorm]     = { color8, background, gray },
-    [SchemeSel]      = { gray, color1,  gray  },
+    [SchemeSel]      = { gray, color1,  color4  },
     [TabSel]         = { color7, background,  background  },
     [TabNorm]        = { gray, background, background },
     [SchemeTag]      = { gray, background, background },
