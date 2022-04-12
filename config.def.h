@@ -17,7 +17,6 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails,display systray on the 1st monitor,False: display systray on last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
-enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always };
 static const int showtab            = showtab_auto;
 static const int toptab             = True;
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -95,6 +94,7 @@ static const unsigned int ulinestroke	= 2;	/* thickness / height of the underlin
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
+static const char scratchpadname[] = "scratchpad";
 static const Rule rules[] = {
     /* xprop(1):
      *	WM_CLASS(STRING) = instance, class
@@ -106,6 +106,7 @@ static const Rule rules[] = {
       	{ "eww",          NULL,       NULL,       0,            0,           1,           -1 },
 	{ "Gnome-calculator", NULL,   NULL,       0,            1,           1,           -1 },
 	{ "St",          "Music",     NULL,       0,            1,           1,           -1 },
+	{ "St",   scratchpadname,     NULL,       0,            1,           1,           -1 },
 	{ "Pcmanfm",      NULL,       NULL,       1 << 2,       0,           0,           -1 },
 	{ NULL, "telegram-desktop",   NULL,       1 << 3,       0,           0,           -1 },
 };
@@ -153,11 +154,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]    = { "dmenu_run", "-l", "5", "-z", "300", NULL };
 static const char *termcmd[]  = {  "st", NULL }; // change this to your term
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
     /* modifier               key        function        argument */
     { MODKEY,                 XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY,                 XK_Return, spawn,          {.v = termcmd }},  
+    { MODKEY,                 XK_grave,  togglescratch,  {.v = scratchpadcmd } },
     { MODKEY,                 XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,                 XK_w,      tabmode,        { -1 } },
     { MODKEY,                 XK_j,      focusstack,     {.i = +1 } },
