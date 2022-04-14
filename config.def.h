@@ -28,11 +28,10 @@ static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
 static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
-static const char *fonts[]     = {"FiraCode Nerd Font:size=14:antialias=true:autohint=true",
-                                  "Hack Nerd Font:size=14:antialias=true:autohint=true",
-                                  "JoyPixels:size=10:antialias=true:autohint=true"
+static const char *fonts[]     = {"Hack Nerd Font:size=14:antialias=true:autohint=true",
+                                  "Material Design Icons-Regular:size=16:antialias=true:autohint=true"
 				 };
-static const int colorfultag        =  1;  /* 0 meaMaterialns use SchemeSel for selected non vacant tag */
+static const int colorfultag        =  1;  /* 0 means use SchemeSel for selected non vacant tag */
 
 // theme
 // #include "themes/nord.h"
@@ -82,8 +81,8 @@ ResourcePref resources[] = {
 };
 
 /* tagging */
-/* static char *tags[] = {" ", " ", " ", " ", " "}; */
-static char *tags[] = { "  ", "  ", "  ", "  ", "  "};
+static char *tags[] = {"󰞷", "󰈹", "󰉋", "󰭹", "󰿎"};
+/* static char *tags[] = { "  ", "  ", "  ", "  ", "  "}; */
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
                                   SchemeTag4, SchemeTag5
