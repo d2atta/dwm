@@ -30,7 +30,7 @@ static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
 static const char *fonts[]     = {"Hack Nerd Font:size=14:antialias=true:autohint=true",
                                   "Material Design Icons-Regular:size=16:antialias=true:autohint=true"
-				 };
+                                 };
 static const int colorfultag        =  1;  /* 0 means use SchemeSel for selected non vacant tag */
 
 // theme
@@ -123,19 +123,22 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[]=",      tile },    /* first entry is default */
-    { "[M]",      monocle },
-    { "[@]",      spiral },
-    { "[\\]",     dwindle },
-    { "H[]",      deck },
-    { "TTT",      bstack },
-    { "===",      bstackhoriz },
-    { "HHH",      grid },
-    { "###",      nrowgrid },
-    { "---",      horizgrid },
     { ":::",      gaplessgrid },
-    { "|M|",      centeredmaster },
     { ">M>",      centeredfloatingmaster },
+    { "[M]",      monocle },
     { "><>",      NULL },    /* no layout function means floating behavior */
+
+    // Extra
+    // =====
+    /* { "[@]",      spiral }, */
+    /* { "[\\]",     dwindle }, */
+    /* { "H[]",      deck }, */
+    /* { "TTT",      bstack }, */
+    /* { "===",      bstackhoriz }, */
+    /* { "HHH",      grid }, */
+    /* { "###",      nrowgrid }, */
+    /* { "---",      horizgrid }, */
+    /* { "|M|",      centeredmaster }, */
 };
 
 /* key definitions */
@@ -197,15 +200,15 @@ static Key keys[] = {
     { MODKEY|ControlMask,            XK_9,      incrovgaps,     {.i = +1 } },
     { MODKEY|ControlMask|ShiftMask,  XK_9,      incrovgaps,     {.i = -1 } },
 
-    { MODKEY|ControlMask,            XK_t,      togglegaps,     {0} },
+    /* { MODKEY|ControlMask,            XK_t,      togglegaps,     {0} }, */
     { MODKEY|ControlMask|ShiftMask,  XK_d,      defaultgaps,    {0} },
 
     { MODKEY,                        XK_q,      killclient,     {0} },
-    { MODKEY,                        XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY|ShiftMask,              XK_f,      setlayout,      {.v = &layouts[1]} },
-    { MODKEY|ShiftMask,              XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY|ShiftMask,              XK_g,      setlayout,      {.v = &layouts[10]} },
-    { MODKEY|ControlMask|ShiftMask,  XK_t,      setlayout,      {.v = &layouts[13]} },
+    { MODKEY|ShiftMask,              XK_t,      setlayout,      {.v = &layouts[0]} },  // Tiling
+    { MODKEY|ShiftMask,              XK_m,      setlayout,      {.v = &layouts[3]} },  // Monocole
+    { MODKEY|ShiftMask,              XK_c,      setlayout,      {.v = &layouts[2]} },  // Centered floating
+    { MODKEY|ShiftMask,              XK_g,      setlayout,      {.v = &layouts[1]} }, // Grid View
+    { MODKEY|ShiftMask,              XK_f,      setlayout,      {.v = &layouts[4]} }, // Floating
     { MODKEY,                        XK_space,  setlayout,      {0} },
     { MODKEY|ControlMask,            XK_comma,  cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,            XK_period, cyclelayout,    {.i = +1 } },
@@ -247,7 +250,7 @@ static Button buttons[] = {
     { ClkWinTitle,          0,              Button2,        zoom,             {0} },
     { ClkStatusText,        0,              Button2,        spawn,            {.v = termcmd } },
 
-		/* Keep movemouse? */
+    /* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */
 
 		/* placemouse options, choose which feels more natural:
